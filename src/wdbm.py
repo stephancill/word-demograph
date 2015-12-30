@@ -89,16 +89,6 @@ def filtrate(text):
     return filtered
 
 def main():
-    # content = []
-    # database_name = "database.db"
-    # inputfile_name = "input.txt"
-    # with open(inputfile_name, "r") as inputf:
-    #     for line in inputf:
-    #         content.append(line)
-    # content = filtrate(" ".join(content))
-    # database = load(database_name)
-    # database = update(content, database)
-    # write(database_name, database)
     pass
 
 if __name__ == "__main__":
