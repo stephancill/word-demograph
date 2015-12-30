@@ -7,14 +7,16 @@
 """
 import string
 
-__author__ = "Stephan Cilliers <stephanus.cilliers@gmail.com> "
-default_db_name = "database.db"
+default_db_name = "default.db"
 
-def load(dbname=default_db_name):
+__author__ = "Stephan Cilliers <stephanus.cilliers@gmail.com> "
+
+
+def load(dbname=default_db_name, submissions_scanned_f=None):
     """
     ---------------------------------------------------------------------------
     Load database text file into dictionary. (returns: dictionary)
-    *arguments: (1) File dbname
+    *arguments: (2) File dbname, File submissions_scanned_f
     ---------------------------------------------------------------------------
     """
     try:
@@ -32,14 +34,29 @@ def load(dbname=default_db_name):
         with open(dbname,"w") as f:
             tmp_db = {}
             pass
+    if submissions_scanned_f == None:
+        return tmp_db
+    else:
+        scanned = []
+        try:
+            with open(submissions_scanned_f, "r") as f:
+                tmp = f.read()
+                scanned = tmp.split()
+            print "Sucessfully loaded list of previously scanned threads."
+            print scanned
+        except Exception as e:
+            print "Failed to load list of previously scanned threads."
+            scanned = []
 
-    return tmp_db
+        return tmp_db, scanned
 
-def write(db, dbname=default_db_name):
+def write(db, dbname=default_db_name, submissions_scanned_f=None,
+    submissions_scanned=None):
     """
     -----------------------------------------------------------------------
     Write dictionary to database text file. (returns: Confirmation)
-    *arguments: (2) File dbname, Dictionary db
+    *arguments: (4) File dbname, Dictionary db, File submissions_scanned_f
+                    List submissions_scanned
     -----------------------------------------------------------------------
     """
     data_to_write = db
@@ -54,6 +71,16 @@ def write(db, dbname=default_db_name):
                 errors += 1
         print "Wrote {} words with {} errors.".format(len(data_to_write), errors) #confirmation
 
+    if submissions_scanned_f != None and submissions_scanned != None:
+        with open(submissions_scanned_f, "w") as f:
+            for i in submissions_scanned:
+                try:
+                    f.write("{}\n".format(i))
+
+                except Exception as e:
+                    print "Failed to write already scanned ID: {}.".format(i)
+                    raise
+
 def update(words, db):
     """
     ---------------------------------------------------------------------------
@@ -64,7 +91,6 @@ def update(words, db):
     local_db = {}
     local_db = db
     for word in words:
-        print type(local_db)
         try:
             local_db[str(word)] += 1 #Update entry
         except Exception as e:
@@ -82,7 +108,8 @@ def filtrate(text):
     exclude = ["\n", string.digits, string.punctuation]
     filtered = text
     for exclusion_set in exclude:
-        filtered = "".join(ch.lower() for ch in filtered if ch not in exclusion_set)
+        filtered = "".join(
+        ch.lower() for ch in filtered if ch not in exclusion_set)
 
     filtered = filtered.split()
 
