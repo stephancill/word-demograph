@@ -9,3 +9,6 @@ Reddit bot that processes comments in threads and creates a database of word usa
 4. `pip install -r requirements.txt` (Install all requirements)
 5. `cd src`
 6. `python main.py` (Run `main.py` from within script directory to avoid file miscreation)
+
+#Usage
+* Change `target_sub` in line 7 of `main.py` to subreddit of choice.
