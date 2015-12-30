@@ -24,6 +24,7 @@ def load(dbname=default_db_name):
                 for line in f:
                     (w, c) = line.split()
                     tmp_db[w] = int(c)
+                print "Database {} sucessfully loaded.".format(dbname)
             except Exception as e:
                 print "Database empty, loading anyway."
     except Exception as e:
@@ -32,7 +33,7 @@ def load(dbname=default_db_name):
             tmp_db = {}
             pass
 
-        return tmp_db
+    return tmp_db
 
 def write(db, dbname=default_db_name):
     """
@@ -51,7 +52,7 @@ def write(db, dbname=default_db_name):
             except Exception as e:
                 print "Failed to write {}, {}.\n".format(i, type(i))
                 errors += 1
-        return "Completed write with {} errors.".format(errors) #confirmation
+        print "Wrote {} words with {} errors.".format(len(data_to_write), errors) #confirmation
 
 def update(words, db):
     """
@@ -60,14 +61,14 @@ def update(words, db):
     *arguments: (2) List words, Dictionary db
     ---------------------------------------------------------------------------
     """
+    local_db = {}
     local_db = db
     for word in words:
+        print type(local_db)
         try:
-            local_db[word] += 1
-            # return "'{}' found, count updated.".format(word)
+            local_db[str(word)] += 1 #Update entry
         except Exception as e:
-            local_db[word] = 1
-            # return "'{}' not found, added.".format(word)
+            local_db[str(word)] = 1 #Create entry
 
     return local_db
 
@@ -79,10 +80,13 @@ def filtrate(text):
     ---------------------------------------------------------------------------
     """
     exclude = ["\n", string.digits, string.punctuation]
+    filtered = text
     for exclusion_set in exclude:
-        filtered = "".join(ch.lower() for ch in text if ch not in exclusion_set)
+        filtered = "".join(ch.lower() for ch in filtered if ch not in exclusion_set)
 
-    return filtered.split()
+    filtered = filtered.split()
+
+    return filtered
 
 def main():
     # content = []
