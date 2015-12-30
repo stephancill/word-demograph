@@ -20,17 +20,18 @@ def main():
 
     for submission in submissions:
         submission_ = submission
+        print "submission_.replace_more_comments(limit=None, threshold=0)"
         submission_.replace_more_comments(limit=None, threshold=0)
+        print "flat_comments = praw.helpers.flatten_tree(submission_.comments)"
         flat_comments = praw.helpers.flatten_tree(submission_.comments)
-
-        already_done = set()
-        print type(flat_comments)
-        for comment in flat_comments:
-            if comment.id not in already_done:
-                print comment[:5]
-                # database = wdbm.update(wdbm.filtrate(comment), database)
-                # already_done.add(comment.id)
-        print "Successfully counted words in {}".format(submission)
+        # already_done = set()
+        # print type(flat_comments)
+        # for comment in flat_comments:
+        #     if comment.id not in already_done:
+        #         print comment[:5]
+        #         # database = wdbm.update(wdbm.filtrate(comment), database)
+        #         # already_done.add(comment.id)
+        # print "Successfully counted words in {}".format(submission)
 
     # write(database_name, database)
 
