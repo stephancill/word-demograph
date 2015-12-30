@@ -1,7 +1,10 @@
 # word-demograph
 Reddit bot that processes comments in threads and creates a database of word usage demographics.
 
-Installation:
-1. Clone this repo and create a virtualenv in its directory.\n
-2. Install all requirements.\n
-3. Run main.py in /src.\n
+#Running:
+1. `git clone https://thisrepo` (Clone this repo)
+2. `virtualenv word-demograph` (Create a virtualenv in its directory)
+3. `cd word-demograph`
+4. `pip install -r requirements.txt` (Install all requirements)
+5. `cd src`
+6. `python main.py` (Run `main.py` from within script directory to avoid file miscreation)
