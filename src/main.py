@@ -1,6 +1,5 @@
 import praw
 import time
-# import tqdm
 import wdbm
 
 
