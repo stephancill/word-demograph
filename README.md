@@ -2,7 +2,7 @@
 Reddit bot that processes comments in threads and creates a database of word usage demographics.
 
 #Running:
-1. `git clone https://thisrepo` (Clone this repo)
+1. `git clone https://github.com/stephancill/word-demograph.git` (Clone this repo)
 2. `virtualenv word-demograph` (Create a virtualenv in its directory)
 3. `cd word-demograph`
 4. `pip install -r requirements.txt` (Install all requirements)
