@@ -12,3 +12,4 @@ Reddit bot that processes comments in threads and creates a database of word usa
 
 #Usage
 * Change `target_sub` in line 7 of `main.py` to subreddit of choice.
+* Output is sent to `[target_sub].db` in `src/`
