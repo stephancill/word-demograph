@@ -11,7 +11,7 @@ Reddit bot that processes comments in threads and creates a database of word usa
 6. See usage.
 
 #Usage
-* `python main.py [target_subreddit]` (Default subreddit is `/r/all`)
+* `python main.py [target_subreddit]` (e.g. `python main.py all` targets /r/all.)
 * Output is sent to `[target_sub].db` in `src/`
 
 ##Please note that `main.py` must be run from within the `src/` directory.
