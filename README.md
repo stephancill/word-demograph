@@ -3,9 +3,10 @@ Script that processes comments in threads and creates a database of word usage d
 
 #Requirements:
 * Python 2.7
-* virtualenv => 13.1.2 
+* virtualenv => 13.1.2
+[additional dependencies in `requirements.txt`]
 
-#Set up:
+#Set up in virtualenv:
 1. `git clone https://github.com/stephancill/word-demograph.git` (Clone this repo)
 2. `virtualenv word-demograph` (Create a virtualenv in its directory)
 3. `source word-demograph/bin/activate` (Activate virtual environment)
