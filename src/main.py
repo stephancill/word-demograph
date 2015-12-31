@@ -6,15 +6,16 @@ import wdbm
 
 def main():
     try:
-        target_sub = sys.argv[1] #First arg is filename
+        target_sub = sys.argv[1]    # First arg is filename
     except Exception as e:
         target_sub = "all"
     database_name = "db_{}.db".format(target_sub)
     database = {}
     submissions_scanned_f = "submissions_scanned.txt"
-    database, submissions_scanned = wdbm.load(database_name, submissions_scanned_f)
-    r = praw.Reddit(user_agent=
-    'Documenting Reddit vocabulary.by /u/tookieewooper')
+    database, submissions_scanned = wdbm.load(database_name,
+                                              submissions_scanned_f)
+    r = praw.Reddit(user_agent='''Documenting Reddit vocabulary.
+                                by /u/tookieewooper''')
     subreddit = r.get_subreddit(target_sub)
     try:
         submissions = subreddit.get_top_from_day(limit=5)
@@ -31,19 +32,18 @@ def main():
                 if comment.id not in already_done:
                     if "praw.objects.Comment" in str(type(comment))
                     and str(comment) != None:
-                        database = wdbm.update(
-                        wdbm.filtrate(str(comment)), database)
-
+                        database = wdbm.update(wdbm.filtrate(str(comment,
+                                                             database)))
                         already_done.add(comment.id)
             submissions_scanned.append(submission.id)
-            print "SECCESSFULLY COUNTED: '{}- {}'".format(
-            submission.id, str(submission)[:20])
+            print "SECCESSFULLY COUNTED: '{}- {}'".format(submission.id,
+                                                          str(submission)[:20])
         else:
-            print "ALREADY COUNTED: '{}- {}'".format(
-            submission.id, str(submission)[:20])
+            print "ALREADY COUNTED: '{}- {}'".format(submission.id,
+                                                     str(submission)[:20])
 
-    wdbm.write(database, database_name, submissions_scanned_f, submissions_scanned)
-
+    wdbm.write(database, database_name,
+               submissions_scanned_f, submissions_scanned)
 
 if __name__ == "__main__":
     main()
