@@ -2,7 +2,7 @@
 Script that processes comments in threads and creates a database of word usage demographics.
 
 #Requirements:
-* Python 2.7
+* Python == 2.7
 * virtualenv => 13.1.2
 [additional dependencies in `requirements.txt`]
 
