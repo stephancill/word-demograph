@@ -5,7 +5,7 @@
 2b. Update dictionary values with update()
 3. Finally write the dictionary back to database file with write()
 """
-__version__ = "$Revision$"
+
 __author__ = "Stephan Cilliers <stephanus.cilliers@gmail.com> "
 
 
@@ -56,7 +56,7 @@ def write(db, dbname=default_db_name, submissions_scanned_f=None,
     submissions_scanned=None):
     """
     -----------------------------------------------------------------------
-    Write dictionary to database text file. (returns: Confirmation)
+    Write dictionary to database file. (returns: None)
     *arguments: (4) File dbname, Dictionary db, File submissions_scanned_f
                     List submissions_scanned
     -----------------------------------------------------------------------
@@ -121,7 +121,6 @@ def filtrate(text):
         for word in filtered:
             index = word.find(substring)
             if index != -1:
-                print "Found URL"
                 tmp_word = word[index:]
             else:
                 tmp_filtered.append(word)
