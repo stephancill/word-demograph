@@ -3,3 +3,4 @@ src/askreddit.db
 src/submissions_scanned.txt
 
 *.db
+*.pyc

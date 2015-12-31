@@ -16,9 +16,7 @@ def main():
         submissions = subreddit.get_top_from_day(limit=5)
         print "Fetched submissions."
     except Exception as e:
-        print "Couldn't fetch posts, waiting 10 seconds before retrying."
-        time.sleep(10)
-        submissions = subreddit.get_top_from_day(limit=5)
+        print "Couldn't fetch submissions."
 
     for submission in submissions:
         if submission.id not in submissions_scanned:
@@ -31,9 +29,9 @@ def main():
                         database = wdbm.update(wdbm.filtrate(str(comment)), database)
                         already_done.add(comment.id)
             submissions_scanned.append(submission.id)
-            print "Successfully counted words in '{}'".format(submission)
+            print "SECCESSFULLY COUNTED: '{}– {}'".format(submission.id, str(submission)[7:27])
         else:
-            print "Already counted words in '{}''".format(submission)
+            print "ALREADY COUNTED: '{}– {}'".format(submission.id, str(submission)[7:27])
 
     wdbm.write(database, database_name, submissions_scanned_f, submissions_scanned)
 

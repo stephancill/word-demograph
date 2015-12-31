@@ -72,14 +72,13 @@ def write(db, dbname=default_db_name, submissions_scanned_f=None,
                 print "Failed to write {}, {}.\n".format(i, type(i))
                 errors += 1
         #Confirmation
-        print "Wrote {} words with {} errors.".format(len(data_to_write), errors)
+        print "Wrote {} words to {} with {} errors.".format(len(data_to_write), dbname, errors)
 
     if submissions_scanned_f != None and submissions_scanned != None:
         with open(submissions_scanned_f, "w") as f:
             for i in submissions_scanned:
                 try:
                     f.write("{}\n".format(i))
-
                 except Exception as e:
                     print "Failed to write already scanned ID: {}.".format(i)
                     raise
