@@ -1,6 +1,10 @@
 # word-demograph
 Script that processes comments in threads and creates a database of word usage demographics.
 
+#Requirements:
+* Python 2.7
+* virtualenv => 13.1.2 
+
 #Set up:
 1. `git clone https://github.com/stephancill/word-demograph.git` (Clone this repo)
 2. `virtualenv word-demograph` (Create a virtualenv in its directory)
@@ -10,7 +14,7 @@ Script that processes comments in threads and creates a database of word usage d
 5. `cd src`
 6. See usage.
 
-#Usage
+#Usage:
 * `python main.py [target_subreddit]` (e.g. `python main.py all` targets /r/all.)
 * Output is sent to `[target_sub].db` in `src/`
 
