@@ -1,4 +1,5 @@
 .DS_Store
+src/*.pyc
 *.db
 *.pyc
 *.txt
