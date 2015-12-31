@@ -1,15 +1,17 @@
 #Word Database Manager
-"""Usage:
+"""Usage of Word Database Manager:
 1. Load database into dictionary with load()
 2a. Filter through input text and isolate words with filtrate()
 2b. Update dictionary values with update()
 3. Finally write the dictionary back to database file with write()
 """
+__version__ = "$Revision$"
+__author__ = "Stephan Cilliers <stephanus.cilliers@gmail.com> "
+
+
 import string
 
 default_db_name = "default.db"
-
-__author__ = "Stephan Cilliers <stephanus.cilliers@gmail.com> "
 
 
 def load(dbname=default_db_name, submissions_scanned_f=None):
@@ -69,7 +71,8 @@ def write(db, dbname=default_db_name, submissions_scanned_f=None,
             except Exception as e:
                 print "Failed to write {}, {}.\n".format(i, type(i))
                 errors += 1
-        print "Wrote {} words with {} errors.".format(len(data_to_write), errors) #confirmation
+        #Confirmation
+        print "Wrote {} words with {} errors.".format(len(data_to_write), errors)
 
     if submissions_scanned_f != None and submissions_scanned != None:
         with open(submissions_scanned_f, "w") as f:
@@ -106,6 +109,7 @@ def filtrate(text):
     ---------------------------------------------------------------------------
     """
     exclude = ["\n", string.digits, string.punctuation]
+    exclude_substrings = ["http"]
     filtered = text
     for exclusion_set in exclude:
         filtered = "".join(
@@ -113,10 +117,26 @@ def filtrate(text):
 
     filtered = filtered.split()
 
+    for substring in exclude_substrings:
+        tmp_filtered = []
+        for word in filtered:
+            index = word.find(substring)
+            if index != -1:
+                print "Found URL"
+                tmp_word = word[index:]
+            else:
+                tmp_filtered.append(word)
+        filtered = tmp_filtered
+
     return filtered
 
 def main():
-    pass
+    print """Usage of Word Database Manager:
+    1. Load database into dictionary with load()
+    2a. Filter through input text and isolate words with filtrate()
+    2b. Update dictionary values with update()
+    3. Finally write the dictionary back to database file with write()
+    """
 
 if __name__ == "__main__":
     main()
