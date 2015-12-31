@@ -17,7 +17,9 @@ Script that processes comments in threads and creates a database of word usage d
 6. See usage.
 
 #Usage:
-* `python main.py [target_subreddit]` (e.g. `python main.py all` targets /r/all.)
+* `python main.py -t [target_subreddit] -n [number_of_posts]`
+(e.g. `python main.py all` targets /r/all.)
 * Output is sent to `[target_sub].db` in `src/`
+* `python main.py --help` for more usage commands.
 
-##Please note that `main.py` must be run from within the `src/` directory.
+###Please note that `main.py` must be run from within the `src/` directory.
