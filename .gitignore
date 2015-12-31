@@ -3,3 +3,7 @@ src/*.pyc
 *.db
 *.pyc
 *.txt
+
+*.pyc
+
+src/wdbm.pyc
