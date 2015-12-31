@@ -49,10 +49,10 @@ def main():
                         more_comments = comment.comments()
                         for more_comments_comment in more_comments:
                             if str(comment) != None:
-                                print str(more_comments_comment)
-                                # database = wdbm.update(wdbm.filtrate(str(more_comments_comment)),
-                                #                        database)
-                                # already_done.add(more_comments_comment.id)
+                                # print str(more_comments_comment)
+                                database = wdbm.update(wdbm.filtrate(str(more_comments_comment)),
+                                                       database)
+                                already_done.add(more_comments_comment.id)
 
             submissions_scanned.append(submission.id)
             print "SECCESSFULLY COUNTED: {}- '{}'".format(submission.id,
