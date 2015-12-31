@@ -28,7 +28,7 @@ def main():
                                 by /u/tookieewooper''')
     subreddit = r.get_subreddit(target_sub)
     try:
-        submissions = subreddit.get_top_from_day(limit=submission_count)
+        submissions = subreddit.get_top_from_all(limit=submission_count)
         print "Fetched {} submissions from {}.".format(submission_count,
                                                        target_sub)
     except Exception as e:
