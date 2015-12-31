@@ -5,6 +5,7 @@
 3. Finally write the dictionary back to database file with write()
 """
 
+import operator
 import string
 
 __author__ = "Stephan Cilliers <stephanus.cilliers@gmail.com> "
@@ -15,7 +16,7 @@ default_db_name = "default.db"
 def load(dbname=default_db_name, submissions_scanned_f=None):
     """
     ---------------------------------------------------------------------------
-    Load database text file into dictionary. (returns: dictionary)
+    Load database file into dictionary. (returns: dictionary)
     *arguments: (2) File dbname, File submissions_scanned_f
     ---------------------------------------------------------------------------
     """
@@ -61,12 +62,14 @@ def write(db, dbname=default_db_name, submissions_scanned_f=None,
     -----------------------------------------------------------------------
     """
     data_to_write = db
-    sorted_values = sorted(data_to_write)
+    sorted_values = sorted(data_to_write.items(),
+                           key=operator.itemgetter(1),
+                           reverse=True)
     with open(dbname, "w") as f:
         errors = 0
         for i in sorted_values:
             try:
-                f.write("{} {}\n".format(i, data_to_write[i]))
+                f.write("{} {}\n".format(i[0], i[1]))
             except Exception as e:
                 print "Failed to write {}, {}.\n".format(i, type(i))
                 errors += 1

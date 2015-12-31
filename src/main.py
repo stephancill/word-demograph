@@ -36,11 +36,11 @@ def main():
                                                    database)
                             already_done.add(comment.id)
             submissions_scanned.append(submission.id)
-            print "SECCESSFULLY COUNTED: '{}- {}'".format(submission.id,
-                                                          str(submission)[:20])
+            print "SECCESSFULLY COUNTED: {}- '{}'".format(submission.id,
+                                                          str(submission)[:40])
         else:
-            print "ALREADY COUNTED: '{}- {}'".format(submission.id,
-                                                     str(submission)[:20])
+            print "ALREADY COUNTED: {}- '{}'".format(submission.id,
+                                                     str(submission)[:40])
 
     wdbm.write(database, database_name,
                submissions_scanned_f, submissions_scanned)
