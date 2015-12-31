@@ -42,7 +42,6 @@ def load(dbname=default_db_name, submissions_scanned_f=None):
                 tmp = f.read()
                 scanned = tmp.split()
             print "Sucessfully loaded list of previously scanned threads."
-            print scanned
         except Exception as e:
             print "Failed to load list of previously scanned threads."
             scanned = []
