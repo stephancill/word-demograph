@@ -32,8 +32,8 @@ def main():
                 if comment.id not in already_done:
                     if "praw.objects.Comment" in str(type(comment)):
                         if str(comment) != None:
-                            database = wdbm.update(wdbm.filtrate(str(comment,
-                                                                 database)))
+                            database = wdbm.update(wdbm.filtrate(str(comment)),
+                                                   database)
                             already_done.add(comment.id)
             submissions_scanned.append(submission.id)
             print "SECCESSFULLY COUNTED: '{}- {}'".format(submission.id,
