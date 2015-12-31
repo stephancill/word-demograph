@@ -1,5 +1,5 @@
 # word-demograph
-Reddit bot that processes comments in threads and creates a database of word usage demographics.
+Script that processes comments in threads and creates a database of word usage demographics.
 
 #Set up:
 1. `git clone https://github.com/stephancill/word-demograph.git` (Clone this repo)
