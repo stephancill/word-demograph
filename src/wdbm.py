@@ -1,8 +1,6 @@
-"""Usage of Word Database Manager:
-1. Load database into dictionary with load()
-2a. Filter through input text and isolate words with filtrate()
-2b. Update dictionary values with update()
-3. Finally write the dictionary back to database file with write()
+"""Word Database Manager
+A module that is designed for the extraction of words from text sources and
+constructing databases that contain word frequency data.
 """
 
 import operator
