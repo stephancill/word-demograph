@@ -1,6 +1,4 @@
 .DS_Store
-src/askreddit.db
-src/submissions_scanned.txt
-
 *.db
 *.pyc
+*.txt
