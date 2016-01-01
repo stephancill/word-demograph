@@ -21,7 +21,7 @@ def load(dbname=default_db_name, submissions_scanned_f=None):
     """
     try:
         os.chdir("../databases")
-    except Exception as e:
+    except OSError as e:
         os.makedirs("../databases")
         os.chdir("../databases")
     try:
@@ -34,7 +34,7 @@ def load(dbname=default_db_name, submissions_scanned_f=None):
                 print "Database {} sucessfully loaded.".format(dbname)
             except Exception as e:
                 print "Database empty, loading anyway."
-    except Exception as e:
+    except IOError as e:
         print "Database file not found, creating '{}'.".format(dbname)
         with open(dbname, "w") as f:
             tmp_db = {}
@@ -48,7 +48,7 @@ def load(dbname=default_db_name, submissions_scanned_f=None):
                 tmp = f.read()
                 scanned = tmp.split()
             print "Sucessfully loaded list of previously scanned threads."
-        except Exception as e:
+        except IOError as e:
             print "Failed to load list of previously scanned threads."
             scanned = []
 
@@ -73,7 +73,7 @@ def write(db, dbname=default_db_name, submissions_scanned_f=None,
         for i in sorted_values:
             try:
                 f.write("{} {}\n".format(i[0], i[1]))
-            except Exception as e:
+            except IOError as e:
                 print "Failed to write {}, {}.\n".format(i, type(i))
                 errors += 1
         print "Wrote {} words to {} with {} errors.".format(len(data_to_write),
@@ -85,7 +85,7 @@ def write(db, dbname=default_db_name, submissions_scanned_f=None,
             for i in submissions_scanned:
                 try:
                     f.write("{}\n".format(i))
-                except Exception as e:
+                except IOError as e:
                     print "Failed to write already scanned ID: {}.".format(i)
                     raise
 

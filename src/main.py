@@ -31,9 +31,8 @@ def main():
         submissions = subreddit.get_top_from_all(limit=submission_count)
         print "Fetched {} submissions from {}.".format(submission_count,
                                                        target_sub)
-    except Exception as e:
-        print "Couldn't fetch submissions from {}.".format(target_sub)
-        raise
+    except praw.errors.InvalidSubreddit as e:
+        sys.exit("Couldn't fetch submissions from {}.".format(target_sub))
 
     for submission in submissions:
         if submission.id not in submissions_scanned:
