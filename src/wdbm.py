@@ -4,6 +4,7 @@ constructing databases that contain word frequency data.
 """
 
 import operator
+import os
 import string
 
 __author__ = "Stephan Cilliers <stephanus.cilliers@gmail.com> "
@@ -18,6 +19,11 @@ def load(dbname=default_db_name, submissions_scanned_f=None):
     *arguments: (2) File dbname, File submissions_scanned_f
     ---------------------------------------------------------------------------
     """
+    try:
+        os.chdir("../databases")
+    except Exception as e:
+        os.makedirs("../databases")
+        os.chdir("../databases")
     try:
         with open(dbname, "r") as f:
             tmp_db = {}
