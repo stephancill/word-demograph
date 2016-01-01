@@ -20,7 +20,7 @@ def main():
 
     database_name = "db_{}.db".format(target_sub)
     database = {}
-    submissions_scanned_f = "submissions_scanned.txt"
+    submissions_scanned_f = "db_{}submissions_scanned.txt".format(target_sub)
     database, submissions_scanned = wdbm.load(database_name,
                                               submissions_scanned_f)
 
