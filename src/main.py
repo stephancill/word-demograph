@@ -9,7 +9,7 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("-t", "--target",
                         help="targeted subreddit",
-                        default="all")
+                        required=True)
     parser.add_argument("-n", "--posts",
                         help="number of posts to fetch",
                         default=5, type=int)
@@ -33,6 +33,7 @@ def main():
                                                        target_sub)
     except Exception as e:
         print "Couldn't fetch submissions from {}.".format(target_sub)
+        raise
 
     for submission in submissions:
         if submission.id not in submissions_scanned:
