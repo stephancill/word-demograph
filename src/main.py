@@ -1,11 +1,17 @@
 import argparse
+import logging
 import praw
 import sys
 import time
+import tqdm
 import wdbm
 
 
 def main():
+    logging.basicConfig(format="%(levelname)s:%(message)s",
+                        filename="{}.log".format(__name__),
+                        level=logging.DEBUG)
+
     parser = argparse.ArgumentParser()
     parser.add_argument("-t", "--target",
                         help="targeted subreddit",
@@ -20,7 +26,7 @@ def main():
 
     database_name = "db_{}.db".format(target_sub)
     database = {}
-    submissions_scanned_f = "db_{}submissions_scanned.txt".format(target_sub)
+    submissions_scanned_f = "ss_{}.txt".format(target_sub)
     database, submissions_scanned = wdbm.load(database_name,
                                               submissions_scanned_f)
 
@@ -29,39 +35,34 @@ def main():
     subreddit = r.get_subreddit(target_sub)
     try:
         submissions = subreddit.get_top_from_all(limit=submission_count)
-        print "Fetched {} submissions from {}.".format(submission_count,
-                                                       target_sub)
+        logging.info("Fetched {} submissions from {}.".format(submission_count,
+                                                              target_sub))
     except praw.errors.InvalidSubreddit as e:
         sys.exit("Couldn't fetch submissions from {}.".format(target_sub))
 
-    for submission in submissions:
+    for submission in tqdm.tqdm(submissions):
         if submission.id not in submissions_scanned:
             flat_comments = praw.helpers.flatten_tree(submission.comments)
             already_done = set()
             for comment in flat_comments:
                 if comment.id not in already_done:
                     if "praw.objects.Comment" in str(type(comment)):
-                        if str(comment) != None:
+                        if str(comment) is not None:
                             database = wdbm.update(wdbm.filtrate(str(comment)),
                                                    database)
                             already_done.add(comment.id)
 
-                    # else:         # Load more comments
-                    #     more_comments = comment.comments()
-                    #     for more_comments_comment in more_comments:
-                    #         if str(comment) != None:
-                    #             # print str(more_comments_comment)
-                    #             database = wdbm.update(wdbm.filtrate(
-                    #                            str(more_comments_comment)),
-                    #                                    database)
-                    #             already_done.add(more_comments_comment.id)
-
             submissions_scanned.append(submission.id)
-            print "SECCESSFULLY COUNTED: {}- '{}'".format(submission.id,
-                                                          str(submission)[:40])
+            logging.info("SECCESSFULLY COUNTED: {}- '{}'".format(submission.id,
+                                                                str(
+                                                                    submission
+                                                                )[:40]))
+
         else:
-            print "ALREADY COUNTED: {}- '{}'".format(submission.id,
-                                                     str(submission)[:40])
+            logging.info("ALREADY COUNTED: {}- '{}'".format(submission.id,
+                                                           str(
+                                                               submission
+                                                           )[:40]))
 
     wdbm.write(database, database_name,
                submissions_scanned_f, submissions_scanned)
