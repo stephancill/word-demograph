@@ -53,19 +53,18 @@ def main():
                             already_done.add(comment.id)
 
             submissions_scanned.append(submission.id)
-            logging.info("SECCESSFULLY COUNTED: {}- '{}'".format(submission.id,
-                                                                str(
-                                                                    submission
-                                                                )[:40]))
-
+            print "SECCESSFULLY COUNTED: {}- '{}'".format(submission.id,
+                                                          str(submission)[:40])
         else:
-            logging.info("ALREADY COUNTED: {}- '{}'".format(submission.id,
-                                                           str(
-                                                               submission
-                                                           )[:40]))
+            print "ALREADY COUNTED: {}- '{}'".format(submission.id,
+                                                     str(submission)[:40])
 
-    wdbm.write(database, database_name,
-               submissions_scanned_f, submissions_scanned)
+    wdbm.write(
+               database,
+               database_name,
+               submissions_scanned_f,
+               submissions_scanned
+              )
 
 if __name__ == "__main__":
     main()
