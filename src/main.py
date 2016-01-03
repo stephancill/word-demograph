@@ -3,8 +3,8 @@ import logging
 import praw
 import sys
 import time
-import tqdm
 import wdbm
+from tqdm import tqdm
 
 class RedditWDBM(object):
     """
@@ -14,37 +14,37 @@ class RedditWDBM(object):
     ---------------------------------------------------------------------------
     """
 
-    def __init__(self, target, submission_count=5):
+    def __init__(self, target, post_count=5):
         self.target_sub = target
-        self.submission_count = submission_count
+        self.post_count = post_count
 
 
     def main(self):
         """
-        Starts processing.
+        Start processing.
         """
         logging.basicConfig(format="%(levelname)s:%(message)s",
                             filename="{}.log".format(__name__),
                             level=logging.DEBUG)
 
         database_name = "db_{}.db".format(self.target_sub)
-        database = {}
-        submissions_scanned_f = "ss_{}.txt".format(self.target_sub)
-        database, submissions_scanned = wdbm.load(database_name,
-                                                  submissions_scanned_f)
+        scanned_f = "ss_{}.txt".format(self.target_sub)
+        tmp_database = {}
+        tmp_scanned =
+        tmp_database, tmp_scanned = wdbm.load(database_name, scanned_f)
 
         r = praw.Reddit(user_agent='''Documenting Reddit vocabulary.
                                     by /u/tookieewooper''')
         subreddit = r.get_subreddit(self.target_sub)
         try:
-            submissions = subreddit.get_top_from_all(limit=self.submission_count)
-            logging.info("Fetched {0} submissions from {1}.".format(self.submission_count,
+            submissions = subreddit.get_top_from_all(limit=self.post_count)
+            logging.info("Fetched {0} submissions from {1}.".format(self.post_count,
                                                                   self.target_sub))
         except praw.errors.InvalidSubreddit as e:
             sys.exit("Couldn't fetch submissions from {}.".format(self.target_sub))
 
-        for submission in tqdm.tqdm(submissions):
-            if submission.id not in submissions_scanned:
+        for submission in tqdm(submissions):
+            if submission.id not in tmp_scanned:
                 flat_comments = praw.helpers.flatten_tree(submission.comments)
                 already_done = set()
                 for comment in flat_comments:
@@ -52,10 +52,10 @@ class RedditWDBM(object):
                         if "praw.objects.Comment" in str(type(comment)):
                             if str(comment) is not None:
                                 database = wdbm.update(wdbm.filtrate(str(comment)),
-                                                       database)
+                                                       tmp_database)
                                 already_done.add(comment.id)
 
-                submissions_scanned.append(submission.id)
+                tmp_scanned.append(submission.id)
                 print "SECCESSFULLY COUNTED: {0}- '{1}'".format(submission.id,
                                                               str(submission)[:40])
             else:
@@ -63,11 +63,12 @@ class RedditWDBM(object):
                                                          str(submission)[:40])
 
         wdbm.write(
-                   database,
+                   tmp_database,
                    database_name,
-                   submissions_scanned_f,
-                   submissions_scanned
+                   scanned_f,
+                   tmp_scanned
                   )
+
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
