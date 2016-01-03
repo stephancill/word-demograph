@@ -1,100 +1,100 @@
-1 	/r/AskReddit 	10,094,045
-2 	/r/funny 	10,041,873
-3 	/r/todayilearned 	9,969,377
-4 	/r/pics 	9,922,545
-5 	/r/worldnews 	9,802,996
-6 	/r/science 	9,797,063
-7 	/r/IAmA 	9,683,005
-8 	/r/announcements 	9,672,412
-9 	/r/videos 	9,231,423
-10 	/r/gaming 	9,181,478
-11 	/r/blog 	9,075,865
-12 	/r/movies 	8,861,743
-13 	/r/Music 	8,571,514
-14 	/r/aww 	8,414,367
-15 	/r/news 	7,312,858
-16 	/r/gifs 	7,192,294
-17 	/r/askscience 	7,011,438
-18 	/r/explainlikeimfive 	6,988,257
-19 	/r/EarthPorn 	6,645,824
-20 	/r/books 	6,411,552
-21 	/r/television 	6,169,970
-22 	/r/LifeProTips 	5,556,071
-23 	/r/mildlyinteresting 	5,289,422
-24 	/r/sports 	5,240,405
-25 	/r/DIY 	5,171,556
-26 	/r/Showerthoughts 	5,104,828
-27 	/r/space 	5,068,939
-28 	/r/Fitness 	5,040,328
-29 	/r/tifu 	5,004,841
-30 	/r/technology 	4,977,611
-31 	/r/Jokes 	4,974,147
-32 	/r/InternetIsBeautiful 	4,955,178
-33 	/r/food 	4,935,088
-34 	/r/photoshopbattles 	4,897,413
-35 	/r/history 	4,863,969
-36 	/r/gadgets 	4,861,733
-37 	/r/nottheonion 	4,841,439
-38 	/r/dataisbeautiful 	4,833,200
-39 	/r/GetMotivated 	4,815,754
-40 	/r/Futurology 	4,813,242
-41 	/r/Documentaries 	4,794,847
-42 	/r/personalfinance 	4,775,081
-43 	/r/listentothis 	4,754,588
-44 	/r/philosophy 	4,724,855
-45 	/r/UpliftingNews 	4,666,922
-46 	/r/OldSchoolCool 	4,655,504
-47 	/r/Art 	4,628,146
-48 	/r/nosleep 	4,621,046
-49 	/r/bestof 	4,617,702
-50 	/r/creepy 	4,606,133
-51 	/r/WritingPrompts 	4,496,258
-52 	/r/WTF 	4,492,260
-53 	/r/TwoXChromosomes 	4,382,810
-54 	/r/AdviceAnimals 	4,100,184
-55 	/r/politics 	3,023,971
-56 	/r/atheism 	1,996,050
-57 	/r/woahdude 	869,759
-58 	/r/gonewild 	802,789
-59 	/r/trees 	777,983
-60 	/r/leagueoflegends 	767,502
-61 	/r/reddit.com 	764,530
-62 	/r/4chan 	678,083
-63 	/r/Games 	649,935
-64 	/r/programming 	631,426
-65 	/r/Android 	602,418
-66 	/r/nsfw 	599,816
-67 	/r/interestingasfuck 	596,403
-68 	/r/sex 	595,798
-69 	/r/gameofthrones 	573,524
-70 	/r/cringepics 	569,366
-71 	/r/reactiongifs 	567,974
-72 	/r/europe 	564,606
-73 	/r/BlackPeopleTwitter 	563,504
-74 	/r/fffffffuuuuuuuuuuuu 	540,762
-75 	/r/malefashionadvice 	523,259
-76 	/r/pcmasterrace 	506,404
-77 	/r/YouShouldKnow 	495,623
-78 	/r/ImGoingToHellForThis 	495,032
-79 	/r/Frugal 	493,690
-80 	/r/RealGirls 	488,250
-81 	/r/HistoryPorn 	472,814
-82 	/r/pokemon 	459,706
-83 	/r/Unexpected 	450,882
-84 	/r/AskHistorians 	449,896
-85 	/r/lifehacks 	449,424
-86 	/r/NSFW_GIF 	439,291
-87 	/r/nfl 	434,307
-88 	/r/Minecraft 	429,966
-89 	/r/tattoos 	421,623
-90 	/r/comics 	419,579
-91 	/r/JusticePorn 	417,303
-92 	/r/oddlysatisfying 	406,535
-93 	/r/StarWars 	405,033
-94 	/r/relationships 	402,830
-95 	/r/FoodPorn 	401,234
-96 	/r/soccer 	399,878
-97 	/r/facepalm 	396,213
-98 	/r/cringe 	376,566
-99 	/r/wheredidthesodago 	370,164
-100 	/r/wallpapers 	360,595
+askreddit
+funny
+todayilearned
+pics
+worldnews
+science
+iama
+announcements
+videos
+gaming
+blog
+movies
+music
+aww
+news
+gifs
+askscience
+explainlikeimfive
+earthporn
+books
+television
+lifeprotips
+mildlyinteresting
+sports
+diy
+showerthoughts
+space
+fitness
+tifu
+technology
+jokes
+internetisbeautiful
+food
+photoshopbattles
+history
+gadgets
+nottheonion
+dataisbeautiful
+getmotivated
+futurology
+documentaries
+personalfinance
+listentothis
+philosophy
+upliftingnews
+oldschoolcool
+art
+nosleep
+bestof
+creepy
+writingprompts
+wtf
+twoxchromosomes
+adviceanimals
+politics
+atheism
+woahdude
+gonewild
+trees
+leagueoflegends
+redditcom
+chan
+games
+programming
+android
+nsfw
+interestingasfuck
+sex
+gameofthrones
+cringepics
+reactiongifs
+europe
+blackpeopletwitter
+fffffffuuuuuuuuuuuu
+malefashionadvice
+pcmasterrace
+youshouldknow
+imgoingtohellforthis
+frugal
+realgirls
+historyporn
+pokemon
+unexpected
+askhistorians
+lifehacks
+nsfwgif
+nfl
+minecraft
+tattoos
+comics
+justiceporn
+oddlysatisfying
+starwars
+relationships
+foodporn
+soccer
+facepalm
+cringe
+wheredidthesodago
+wallpapers
