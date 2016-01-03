@@ -15,17 +15,18 @@ logging.basicConfig(format="%(levelname)s:%(message)s",
                     filename="{}.log".format(__name__),
                     level=logging.DEBUG)
 
-def load(dbname=default_db_name, submissions_scanned_f=None):
+def load(dbname=default_db_name, scanned_f=None):
     """
     ---------------------------------------------------------------------------
-    Load database file into dictionary. (returns: dictionary)
-    *arguments: (2) File dbname, File submissions_scanned_f
+    Load database file into dictionary. (returns: [dictionary, list] OR
+    dictionary)
+    *arguments: (2) File dbname, File scanned_f
     ---------------------------------------------------------------------------
     """
     info = {"func": "LOAD"}
     try:
         os.chdir("../databases")
-        logging.debug("Database directory found.", extra=info)
+        logging.debug("SUCCESS: Database directory found.", extra=info)
     except OSError as e:
         os.makedirs("../databases")
         os.chdir("../databases")
@@ -37,7 +38,7 @@ def load(dbname=default_db_name, submissions_scanned_f=None):
                 for line in f:
                     (w, c) = line.split()
                     tmp_db[w] = int(c)
-                logging.info("Database {} sucessfully loaded.".format(dbname),
+                logging.info("SUCCESS: Database {} loaded.".format(dbname),
                              extra=info)
             except Exception as e:
                 logging.debug("Database empty, loading anyway.", extra=info)
@@ -47,32 +48,31 @@ def load(dbname=default_db_name, submissions_scanned_f=None):
         with open(dbname, "w") as f:
             tmp_db = {}
 
-    if submissions_scanned_f is None:
+    if scanned_f is None:
         return tmp_db
     else:
         scanned = []
         try:
-            with open(submissions_scanned_f, "r") as f:
+            with open(scanned_f, "r") as f:
                 tmp = f.read()
                 scanned = tmp.split()
-            logging.info("Sucessfully loaded list of previously scanned threads.",
+            logging.info("SUCCESS: Loaded list of previously scanned threads.",
                          extra=info)
         except IOError as e:
-            logging.warning("Failed to load list of previously scanned threads.",
+            logging.warning("FAIL: to load list of previously scanned threads.",
                             extra=info)
             scanned = []
 
         return tmp_db, scanned
 
 
-def write(db, dbname=default_db_name, submissions_scanned_f=None,
-          submissions_scanned=None):
+def write(db, dbname=default_db_name, scanned_f=None, scanned=None):
     """
-    -----------------------------------------------------------------------
+    ---------------------------------------------------------------------------
     Write dictionary to database file. (returns: None)
-    *arguments: (4) File dbname, Dictionary db, File submissions_scanned_f
-                    List submissions_scanned
-    -----------------------------------------------------------------------
+    *arguments: (4) File dbname, Dictionary db, File scanned_f
+                    List scanned
+    ---------------------------------------------------------------------------
     """
     info = {"func": "WRITE"}
     data_to_write = db
@@ -85,15 +85,17 @@ def write(db, dbname=default_db_name, submissions_scanned_f=None,
             try:
                 f.write("{0} {1}\n".format(i[0], i[1]))
             except IOError as e:
-                logging.error("WRITE: Failed to write {0}, {1}.\n".format(i, type(i)))
+                logging.error("Failed to write {0}, {1}.\n".format(i, type(i)),
+                              extra=info)
                 errors += 1
-        logging.info("WRITE: Wrote {0} words to {1} with {2} errors.".format(len(data_to_write),
-                                                       dbname,
-                                                       errors), extra=info)
+        logging.info("WRITE: Wrote {0} words to {1} with {2} errors.".format(
+                                                        len(data_to_write),
+                                                        dbname,
+                                                        errors), extra=info)
 
-    if submissions_scanned_f is not None and submissions_scanned is not None:
-        with open(submissions_scanned_f, "w") as f:
-            for i in submissions_scanned:
+    if scanned_f is not None and scanned is not None:
+        with open(scanned_f, "w") as f:
+            for i in scanned:
                 try:
                     f.write("{}\n".format(i))
                 except IOError as e:
@@ -127,13 +129,13 @@ def update(words, db):
 
 
 def filtrate(text):
-    info = {"func": "FILTRATE"}
     """
     ---------------------------------------------------------------------------
     Remove punctuation, digits and newlines from input string. (returns: list)
     *arguments: (1) String text
     ---------------------------------------------------------------------------
     """
+    info = {"func": "FILTRATE"}
     exclude = ["\n", string.digits, string.punctuation]
     exclude_substrings = ["http"]
     filtered = text
@@ -165,6 +167,7 @@ def main():
     2b. Update dictionary values with update()
     3. Finally write the dictionary back to database file with write()
     """
+
 
 if __name__ == "__main__":
     main()
