@@ -7,12 +7,22 @@ import tqdm
 import wdbm
 
 class RedditWDBM(object):
+    """
+    ---------------------------------------------------------------------------
+    Processes comments in reddit threads and creates a database of word usage
+    demographics.
+    ---------------------------------------------------------------------------
+    """
+
     def __init__(self, target, submission_count=5):
         self.target_sub = target
         self.submission_count = submission_count
 
 
     def main(self):
+        """
+        Starts processing.
+        """
         logging.basicConfig(format="%(levelname)s:%(message)s",
                             filename="{}.log".format(__name__),
                             level=logging.DEBUG)
@@ -28,7 +38,7 @@ class RedditWDBM(object):
         subreddit = r.get_subreddit(self.target_sub)
         try:
             submissions = subreddit.get_top_from_all(limit=self.submission_count)
-            logging.info("Fetched {} submissions from {}.".format(self.submission_count,
+            logging.info("Fetched {0} submissions from {1}.".format(self.submission_count,
                                                                   self.target_sub))
         except praw.errors.InvalidSubreddit as e:
             sys.exit("Couldn't fetch submissions from {}.".format(self.target_sub))
@@ -46,10 +56,10 @@ class RedditWDBM(object):
                                 already_done.add(comment.id)
 
                 submissions_scanned.append(submission.id)
-                print "SECCESSFULLY COUNTED: {}- '{}'".format(submission.id,
+                print "SECCESSFULLY COUNTED: {0}- '{1}'".format(submission.id,
                                                               str(submission)[:40])
             else:
-                print "ALREADY COUNTED: {}- '{}'".format(submission.id,
+                print "ALREADY COUNTED: {0}- '{1}'".format(submission.id,
                                                          str(submission)[:40])
 
         wdbm.write(

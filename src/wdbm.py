@@ -83,11 +83,11 @@ def write(db, dbname=default_db_name, submissions_scanned_f=None,
         errors = 0
         for i in sorted_values:
             try:
-                f.write("{} {}\n".format(i[0], i[1]))
+                f.write("{0} {1}\n".format(i[0], i[1]))
             except IOError as e:
-                logging.error("WRITE: Failed to write {}, {}.\n".format(i, type(i)))
+                logging.error("WRITE: Failed to write {0}, {1}.\n".format(i, type(i)))
                 errors += 1
-        logging.info("WRITE: Wrote {} words to {} with {} errors.".format(len(data_to_write),
+        logging.info("WRITE: Wrote {0} words to {1} with {2} errors.".format(len(data_to_write),
                                                        dbname,
                                                        errors), extra=info)
 
@@ -120,7 +120,7 @@ def update(words, db):
         except Exception as e:
             local_db[str(word)] = 1     # Create entry
             new += 1
-    logging.debug("UPDATE: {} new, {}, existing added.".format(new, existing),
+    logging.debug("UPDATE: {0} new, {1}, existing added.".format(new, existing),
                   extra=info)
 
     return local_db
