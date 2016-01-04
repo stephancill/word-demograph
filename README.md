@@ -18,8 +18,10 @@ Script that processes comments in threads and creates a database of word usage d
 
 #Usage:
 * `python main.py -t [target_subreddit] -n [number_of_posts]`
-(e.g. `python main.py all` targets /r/all.)
+(e.g. `python main.py -t all` targets /r/all.)
 * Output is sent to `db_[target_sub].db` in `word-demograph/databases`
 * `python main.py --help` for more usage commands.
+* To gather data from the top 100 subreddits autonomously, run
+`python main_allsubs.py`
 
-###Please note that `main.py` must be run from within the `src/` directory.
+###Please note that all scripts must be run from within the `src/` directory.
