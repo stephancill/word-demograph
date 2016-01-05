@@ -7,15 +7,17 @@ import logging
 import operator
 import os
 import string
+import datetime
 
 __author__ = "Stephan Cilliers <stephanus.cilliers@gmail.com> "
 
-default_db_name = "default.db"
+default_db_dir = "databases"
+
 logging.basicConfig(format="%(levelname)s:%(message)s",
                     filename="{}.log".format(__name__),
                     level=logging.DEBUG)
 
-def load(dbname=default_db_name, scanned_f=None):
+def load(dbname, scanned_f=None):
     """
     ---------------------------------------------------------------------------
     Load database file into dictionary. (returns: [dictionary, list] OR
@@ -25,11 +27,11 @@ def load(dbname=default_db_name, scanned_f=None):
     """
     info = {"func": "LOAD"}
     try:
-        os.chdir("../databases")
+        os.chdir("../{}".format(default_db_dir))
         logging.debug("SUCCESS: Database directory found.", extra=info)
     except OSError as e:
-        os.makedirs("../databases")
-        os.chdir("../databases")
+        os.makedirs("../{}".format(default_db_dir))
+        os.chdir("../{}".format(default_db_dir))
         logging.debug("Database directory not found, creating.", extra=info)
     try:
         with open(dbname, "r") as f:
@@ -66,11 +68,11 @@ def load(dbname=default_db_name, scanned_f=None):
         return tmp_db, scanned
 
 
-def write(db, dbname=default_db_name, scanned_f=None, scanned=None):
+def write(db, dbname, scanned_f=None, scanned=None):
     """
     ---------------------------------------------------------------------------
     Write dictionary to database file. (returns: None)
-    *arguments: (4) File dbname, Dictionary db, File scanned_f
+    *arguments: (4) Dictionary db, File dbname, File scanned_f
                     List scanned
     ---------------------------------------------------------------------------
     """
@@ -113,11 +115,11 @@ def update(words, db):
     info = {"func": "UPDATE"}
     local_db = {}
     local_db = db
-    
+
     for word in words:
         try:
             local_db[str(word)] += 1    # Update entry
-        except Exception as e:
+        except KeyError as e:
             local_db[str(word)] = 1     # Create entry
 
     return local_db
@@ -153,6 +155,39 @@ def filtrate(text):
     logging.debug("Filtered.")
 
     return filtered
+
+def merge(files, f="merged"):
+    """
+    ---------------------------------------------------------------------------
+    Merge a list of .db files into a single .db file. (returns: None)
+    *arguments: (2) List files, String filename
+    ---------------------------------------------------------------------------
+    """
+    info = {"func": "MERGE"}
+    # final_filename = "{0}{1}.db".format(str(datetime.datetime.now().time()).replace(":", "."), f)
+    final_filename = "testing.db"
+
+    if os.getcwd()[-len(default_db_dir):] is not default_db_dir:
+        os.chdir("../{}".format(default_db_dir))
+        logging.debug("Changed directory to {}".format(default_db_dir),
+                      extra=info)
+
+    merged_count = 0
+    for filename in files:
+        master_database = load(final_filename)
+        tmp_database = load(filename)
+        for word in tmp_database.items():
+            try:
+                master_database[word[0]] += word[1]
+            except KeyError as e:
+                master_database[word[0]] = word[1]
+
+        write(master_database, final_filename)
+        merged_count += 1
+        logging.debug("SUCCESS: Wrote {0} to {1}".format(filename,
+                                                         final_filename))
+
+    logging.debug("SUCCESS: Merged {} files".format(merged_count), extra=info)
 
 
 def main():
