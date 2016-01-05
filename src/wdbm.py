@@ -79,13 +79,7 @@ def write(db, dbname=default_db_name, scanned_f=None, scanned=None):
     sorted_values = sorted(data_to_write.items(),
                            key=operator.itemgetter(1),
                            reverse=True)
-
-
-    with open(dbname, "r+") as f:
-        tmp_db = {}
-        for line in f:
-            (w, c) = line.split()
-            tmp_db[w] = int(c)
+    with open(dbname, "w") as f:
         errors = 0
         for i in sorted_values:
             try:
@@ -119,6 +113,7 @@ def update(words, db):
     info = {"func": "UPDATE"}
     local_db = {}
     local_db = db
+    
     for word in words:
         try:
             local_db[str(word)] += 1    # Update entry
