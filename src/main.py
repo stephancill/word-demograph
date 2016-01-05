@@ -30,7 +30,7 @@ class RedditWDBM(object):
         database_name = "db_{}.db".format(self.target_sub)
         scanned_f = "ss_{}.txt".format(self.target_sub)
         tmp_database = {}
-        tmp_scanned =
+        tmp_scanned = []
         tmp_database, tmp_scanned = wdbm.load(database_name, scanned_f)
 
         r = praw.Reddit(user_agent='''Documenting Reddit vocabulary.
