@@ -164,8 +164,8 @@ def merge(files, f="merged"):
     ---------------------------------------------------------------------------
     """
     info = {"func": "MERGE"}
-    # final_filename = "{0}{1}.db".format(str(datetime.datetime.now().time()).replace(":", "."), f)
-    final_filename = "testing.db"
+    timestamp = str(datetime.datetime.now().time()).replace(":", ".")
+    final_filename = "{0}{1}.db".format(timestamp, f)
 
     if os.getcwd()[-len(default_db_dir):] is not default_db_dir:
         os.chdir("../{}".format(default_db_dir))
