@@ -39,7 +39,7 @@ class RedditWDBM(object):
                                         by /u/tookieewooper''')
             subreddit = r.get_subreddit(self.target_sub)
             try:
-                submissions = subreddit.get_top_from_all(limit=self.post_count+1)
+                submissions = subreddit.get_top_from_month(limit=self.post_count+1)
                 logging.info("Fetched {0} submissions from {1}.".format(self.post_count,
                                                                       self.target_sub))
             except praw.errors.InvalidSubreddit as e:
