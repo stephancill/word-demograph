@@ -11,7 +11,7 @@ def main():
 
     for subreddit in subs:
         print subreddit
-        mgr = m.RedditWDBM(subreddit, 1000)
+        mgr = m.RedditWDBM(subreddit, merge=None, post_count=1000)
         mgr.main()
 
 if __name__ == "__main__":
