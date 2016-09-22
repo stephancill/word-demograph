@@ -47,19 +47,22 @@ class RedditWDBM(object):
 
             for submission in tqdm(submissions):
                 if submission.id not in tmp_scanned:
-                    flat_comments = praw.helpers.flatten_tree(submission.comments)
-                    already_done = set()
-                    for comment in flat_comments:
-                        if comment.id not in already_done:
-                            if "praw.objects.Comment" in str(type(comment)):
-                                if str(comment) is not None:
-                                    database = wdbm.update(wdbm.filtrate(str(comment)),
-                                                           tmp_database)
-                                    already_done.add(comment.id)
+                    try:
+                        flat_comments = praw.helpers.flatten_tree(submission.comments)
+                        already_done = set()
+                        for comment in flat_comments:
+                            if comment.id not in already_done:
+                                if "praw.objects.Comment" in str(type(comment)):
+                                    if str(comment) is not None:
+                                        database = wdbm.update(wdbm.filtrate(str(comment)),
+                                                               tmp_database)
+                                        already_done.add(comment.id)
 
-                    tmp_scanned.append(submission.id)
-                    print "SECCESSFULLY COUNTED: {0}- '{1}'".format(submission.id,
-                                                                  str(submission)[:40])
+                        tmp_scanned.append(submission.id)
+                        print "SECCESSFULLY COUNTED: {0}- '{1}'".format(submission.id,
+                                                                      str(submission)[:40])
+                    except ConnectionError:
+                        pass
                 else:
                     print "ALREADY COUNTED: {0}- '{1}'".format(submission.id,
                                                              str(submission)[:40])
